@@ -22,15 +22,20 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 int correct =0;
 int attempted = 0;
-Word dictionary = new Word(LanguageHashMap.map);
-String word = dictionary.getEnglishWord();
-String translation = dictionary.getSpanishWord();
+
+
+Word dictionary = new Word(LanguageHashMap.makeDictionary());
+String word = "the"; //dictionary.getEnglishWord();
+String translation = "el/la"; //dictionary.getSpanishWord();
 
     Button button1;
     Button button2;
     Button button3;
     Button button4;
+    Button button5;
     TextView textView;
+    TextView score;
+    TextView attempts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +55,80 @@ String translation = dictionary.getSpanishWord();
         button2 = (Button) findViewById(R.id.button2);
         button3 = (Button) findViewById(R.id.button3);
         button4 = (Button) findViewById(R.id.button4);
+        button5 = (Button) findViewById(R. id.button5);
+        textView = (TextView) findViewById(R.id.textView1);
+        score = (TextView) findViewById(R.id.textView2);
+        attempts = (TextView) findViewById(R.id.textView3);
 
+        score.setText("Score: "+correct);
+        attempts.setText("Attempted: "+ attempted);
+
+        updateScreen();
+
+
+        button1.setOnClickListener(new OnClickListener() {
+
+
+            @Override
+            public void onClick(View view) {
+               clicked(button1);
+            }
+
+        });
+
+        button2.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                // Toast.makeText(MainActivity.this, "Button Clicked", Toast.LENGTH_SHORT).show();
+                clicked(button2);
+            }
+
+        });
+
+        button3.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                // Toast.makeText(MainActivity.this, "Button Clicked", Toast.LENGTH_SHORT).show();
+                clicked(button3);
+            }
+
+        });
+
+        button4.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                // Toast.makeText(MainActivity.this, "Button Clicked", Toast.LENGTH_SHORT).show();
+                clicked(button4);
+            }
+
+        });
+        button5.setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                correct = 0;
+                attempted = 0;
+                updateScreen();
+                dictionary = new Word(LanguageHashMap.makeDictionary());
+
+            }
+        });
+
+
+
+    }
+
+
+
+    public void updateScreen() {
+        dictionary.recalculate();
+        word = dictionary.getEnglishWord();
+        translation = dictionary.getSpanishWord();
+        textView.setText(word);
+        score.setText("Score: " + correct);
+        attempts.setText("Attempted: " + attempted);
         int randomInteger = (int)(Math.random() * 4) + 1;
         switch (randomInteger){
             case 1:
@@ -92,59 +170,9 @@ String translation = dictionary.getSpanishWord();
 
         }
 
-        textView = (TextView) findViewById(R.id.textView1);
 
-        button1.setOnClickListener(new OnClickListener() {
-
-
-            @Override
-            public void onClick(View view) {
-               clicked(button1);
-            }
-
-        });
-
-        button2.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                // Toast.makeText(MainActivity.this, "Button Clicked", Toast.LENGTH_SHORT).show();
-                clicked(button2);
-            }
-
-        });
-
-        button3.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                // Toast.makeText(MainActivity.this, "Button Clicked", Toast.LENGTH_SHORT).show();
-                clicked(button3);
-            }
-
-        });
-
-        button4.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                // Toast.makeText(MainActivity.this, "Button Clicked", Toast.LENGTH_SHORT).show();
-                clicked(button4);
-            }
-
-        });
-
-    }
-
-
-
-    public void generateNewQuestion() {
-        //word = generateword()
-        //translation = generatetranslation(word)
-        textView.setText(word);
         //use math.random to determine which button has correct answer next
         //set other three to random incorrect translations
-
         /*button1.setText();
         button1.setText();
         button1.setText();
@@ -152,12 +180,15 @@ String translation = dictionary.getSpanishWord();
    }
 
     public void clicked(Button button) {
-        if (button.getText().equals(translation))
-        {
-            ++correct;
+        if (attempted<10){
+            if(button.getText().equals(translation)){
+                ++correct;
+            }
+            ++attempted;
+
+            updateScreen();
         }
-        ++attempted;
-        generateNewQuestion();
+
     }
 
 }

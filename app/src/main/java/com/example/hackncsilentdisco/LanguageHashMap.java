@@ -6,9 +6,8 @@ public class LanguageHashMap {
 	/**
 	 * Spanish word, English translation
 	 */
-	public static HashMap<String, String> map = new HashMap<>();
-
-	static {
+	public static HashMap<String, String> makeDictionary() {
+		HashMap<String, String> map = new HashMap<>();
 		map.put("el, la", "the");
 		map.put("de", "of, from");
 		map.put("que", "that, which");
@@ -29,7 +28,7 @@ public class LanguageHashMap {
 		map.put("tener", "to have");
 		map.put("le", "[3rd person] (indirect obj)");
 		map.put("lo", "the (+ neuter)");
-		map.put("lo", "[3rd person] (direct obj-m)");
+		//map.put("lo", "[3rd person] (direct obj-m)");
 		map.put("todo", "all, every");
 		map.put("pero", "but, yet, except");
 		map.put("más", "more");
@@ -41,7 +40,7 @@ public class LanguageHashMap {
 		map.put("ir", "to go");
 		map.put("otro", "other, another");
 		map.put("ese", "that (m) [esa (f)]");
-		map.put("la", "[3rd person] (direct obj-f)");
+		//map.put("la", "[3rd person] (direct obj-f)");
 		map.put("si", "if, whether");
 		map.put("me", "me (obj)");
 		map.put("ya", "already, still");
@@ -109,5 +108,7 @@ public class LanguageHashMap {
 		map.put("menos", "less, fewer");
 		map.put("nuevo", "new");
 		map.put("encontrar", "to find");
+
+		return map;
 	}
 }

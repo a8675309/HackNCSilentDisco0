@@ -10,7 +10,9 @@ public class Word {
         _map = map;
         int size = _map.size();
         int randomNum = (int)(Math.random() * size);
-        String spanishWord = (String)map.entrySet().toArray()[randomNum];
+        Object[] spanishArray = _map.keySet().toArray();
+        Object spanishKey = spanishArray[new Random().nextInt(spanishArray.length)];
+        String spanishWord = (String)spanishKey;//"de"; //(String)map.entrySet().toArray()[randomNum];
         String englishWord = map.get(spanishWord);
 
         _spanishWord = spanishWord;
@@ -26,7 +28,10 @@ public class Word {
     }
     public void recalculate(){
         int randomNum = (int)(Math.random() * getSize());
-        String spanishWord = (String)_map.entrySet().toArray()[randomNum];
+        //String spanishWord = (String)_map.entrySet().toArray()[randomNum];
+        Object[] spanishArray = _map.keySet().toArray();
+        Object spanishKey = spanishArray[new Random().nextInt(spanishArray.length)];
+        String spanishWord = (String)spanishKey;
         String englishWord = _map.get(spanishWord);
 
         _spanishWord = spanishWord;
