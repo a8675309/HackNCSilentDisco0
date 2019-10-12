@@ -22,8 +22,9 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 int correct =0;
 int attempted = 0;
-String word ="the";
-String translation = "el";
+Word dictionary = new Word(LanguageHashMap.map);
+String word = dictionary.getEnglishWord();
+String translation = dictionary.getSpanishWord();
 
     Button button1;
     Button button2;
@@ -50,9 +51,51 @@ String translation = "el";
         button3 = (Button) findViewById(R.id.button3);
         button4 = (Button) findViewById(R.id.button4);
 
+        int randomInteger = (int)(Math.random() * 4) + 1;
+        switch (randomInteger){
+            case 1:
+                button1.setText(dictionary.getSpanishWord());
+                dictionary.recalculate();
+                button2.setText(dictionary.getSpanishWord());
+                dictionary.recalculate();
+                button3.setText(dictionary.getSpanishWord());
+                dictionary.recalculate();
+                button4.setText(dictionary.getSpanishWord());
+                break;
+            case 2:
+                button2.setText(dictionary.getSpanishWord());
+                dictionary.recalculate();
+                button1.setText(dictionary.getSpanishWord());
+                dictionary.recalculate();
+                button3.setText(dictionary.getSpanishWord());
+                dictionary.recalculate();
+                button4.setText(dictionary.getSpanishWord());
+                break;
+            case 3:
+                button3.setText(dictionary.getSpanishWord());
+                dictionary.recalculate();
+                button1.setText(dictionary.getSpanishWord());
+                dictionary.recalculate();
+                button2.setText(dictionary.getSpanishWord());
+                dictionary.recalculate();
+                button4.setText(dictionary.getSpanishWord());
+                break;
+            case 4:
+                button4.setText(dictionary.getSpanishWord());
+                dictionary.recalculate();
+                button2.setText(dictionary.getSpanishWord());
+                dictionary.recalculate();
+                button3.setText(dictionary.getSpanishWord());
+                dictionary.recalculate();
+                button1.setText(dictionary.getSpanishWord());
+                break;
+
+        }
+
         textView = (TextView) findViewById(R.id.textView1);
 
         button1.setOnClickListener(new OnClickListener() {
+
 
             @Override
             public void onClick(View view) {
