@@ -20,14 +20,16 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.content.Intent;
 
+import com.example.hackncsilentdisco.LanguageHashMap.Language;
+
 public class MainActivity extends AppCompatActivity {
-int correct =0;
-int attempted = 0;
+    int correct = 0;
+    int attempted = 0;
 
-
-Word dictionary = new Word(LanguageHashMap.makeDictionary());
-String word = "the"; //dictionary.getEnglishWord();
-String translation = "el/la"; //dictionary.getSpanishWord();
+    Language lang = Language.SPANISH;
+    Word dictionary = new Word(LanguageHashMap.makeDictionary(lang));
+    String word ; //dictionary.getEnglishWord();
+    String translation; //dictionary.getSpanishWord();
 
     Button button1;
     Button button2;
@@ -118,7 +120,7 @@ String translation = "el/la"; //dictionary.getSpanishWord();
                 correct = 0;
                 attempted = 0;
                 updateScreen();
-                dictionary = new Word(LanguageHashMap.makeDictionary());
+                dictionary = new Word(LanguageHashMap.makeDictionary(lang));
 
             }
         });
@@ -209,8 +211,7 @@ String translation = "el/la"; //dictionary.getSpanishWord();
         else {
             button6.setVisibility(View.VISIBLE);
         }
+        }
 
     }
-
-}
 
