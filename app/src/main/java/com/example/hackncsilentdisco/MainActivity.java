@@ -86,19 +86,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (language == Language.FRENCH){
-                    //Scoreboard.fAvgScore = (double)(Scoreboard.fAttempts + correct)/(Scoreboard.fAttempts + attempted);
                     Scoreboard.fCorrect += correct;
                     Scoreboard.fAttempts += attempted;
                 }else{
-                    //Scoreboard.sAvgScore = (double)(Scoreboard.sAttempts + correct)/(Scoreboard.sAttempts + attempted);
                     Scoreboard.fCorrect += correct;
                     Scoreboard.sAttempts += attempted;
                 }
                 correct = 0;
                 attempted = 0;
                 updateScreen();
-                //dictionary = new Word(LanguageHashMap.makeDictionary());
-
             }
         });
 

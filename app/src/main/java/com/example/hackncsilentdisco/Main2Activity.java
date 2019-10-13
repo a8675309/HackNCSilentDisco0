@@ -37,11 +37,9 @@ public class Main2Activity extends AppCompatActivity {
 
 
         if (language.equals("French")){
-            //Scoreboard.fAvgScore = (double)(Scoreboard.fAttempts + numCorrectInt)/(Scoreboard.fAttempts+ numAttemptedInt);
             Scoreboard.fCorrect += numCorrectInt;
             Scoreboard.fAttempts += numAttemptedInt;
         }else{
-            //Scoreboard.sAvgScore = (double)(Scoreboard.sAttempts + numCorrectInt)/(Scoreboard.sAttempts+ numAttemptedInt);
             Scoreboard.sCorrect += numCorrectInt;
             Scoreboard.sAttempts += numAttemptedInt;
         }
