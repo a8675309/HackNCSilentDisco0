@@ -8,7 +8,7 @@ public class LanguageHashMap {
 	public static HashMap<String, String> makeDictionary() {
 		return makeSpanishDictionary();
 	}
-	
+
 	/**
 	 * Spanish word, English translation
 	 */
