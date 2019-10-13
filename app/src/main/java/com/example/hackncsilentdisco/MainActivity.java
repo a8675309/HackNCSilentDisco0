@@ -23,9 +23,10 @@ import android.content.Intent;
 public class MainActivity extends AppCompatActivity {
 int correct =0;
 int attempted = 0;
+boolean isSpanish= true;
+Word dictionary;
 
 
-Word dictionary = new Word(LanguageHashMap.makeDictionary());
 String word = "the"; //dictionary.getEnglishWord();
 String translation = "el/la"; //dictionary.getSpanishWord();
 
@@ -54,7 +55,17 @@ String translation = "el/la"; //dictionary.getSpanishWord();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
+        String language = getIntent().getStringExtra("language");
+        if (language.equals("French")){
+            isSpanish = false;
+        }
 
+        if (isSpanish== true) {
+            dictionary = new Word(LanguageHashMap.makeSpanishDictionary());
+        }
+        else {
+            dictionary = new Word(LanguageHashMap.makeFrenchDictionary());
+        }
 
         button1 = (Button) findViewById(R.id.button1);
         button2 = (Button) findViewById(R.id.button2);
@@ -127,7 +138,18 @@ String translation = "el/la"; //dictionary.getSpanishWord();
 
             @Override
             public void onClick(View view) {
+
                   Intent myIntent = new Intent(getBaseContext(), Main2Activity.class);
+
+                  if (isSpanish)
+                myIntent.putExtra("language", "Spanish");
+                  else
+                      myIntent.putExtra("language", "French");
+
+                myIntent.putExtra("numCorrect", ""+correct);
+                myIntent.putExtra("numAttempted", ""+attempted);
+
+
                     startActivity(myIntent);
 
             }

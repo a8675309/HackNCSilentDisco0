@@ -16,6 +16,7 @@ public class Main0Activity extends AppCompatActivity {
 
     Button frenchButton;
     Button spanishButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +31,7 @@ public class Main0Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(getBaseContext(), MainActivity.class);
+                myIntent.putExtra("language", "French");
                 startActivity(myIntent);
             }
 
@@ -40,6 +42,7 @@ public class Main0Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(getBaseContext(), MainActivity.class);
+                myIntent.putExtra("language", "Spanish");
                 startActivity(myIntent);
             }
 
