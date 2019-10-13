@@ -3,10 +3,16 @@ package com.example.hackncsilentdisco;
 import java.util.HashMap;
 
 public class LanguageHashMap {
+
+	@Deprecated
+	public static HashMap<String, String> makeDictionary() {
+		return makeSpanishDictionary();
+	}
+	
 	/**
 	 * Spanish word, English translation
 	 */
-	public static HashMap<String, String> makeDictionary() {
+	public static HashMap<String, String> makeSpanishDictionary() {
 		HashMap<String, String> map = new HashMap<>();
 		map.put("el, la", "the");
 		map.put("de", "of, from");
@@ -108,6 +114,116 @@ public class LanguageHashMap {
 		map.put("menos", "less, fewer");
 		map.put("nuevo", "new");
 		map.put("encontrar", "to find");
+
+		return map;
+	}
+
+	/**
+	 * French word, English translation
+	 */
+	public static HashMap<String, String> makeFrenchDictionary(){
+		HashMap<String, String> map = new HashMap<>();
+
+		map.put("un", "a, an, one");
+		map.put("à", "to, at, in");
+		map.put("en", "in, by");
+		map.put("le", "the; him, her, it, them");
+		map.put("et", "and");
+		map.put("être", "to be; (being)");
+		map.put("de", "of, from, some, any");
+		map.put("avoir", "to have");
+		map.put("que", "that, what, who, whom, (which)");
+		map.put("ne", "not");
+		map.put("dans", "in, into, from");
+		map.put("ce", "this, that");
+		map.put("il", "he, it");
+		map.put("qui", "who, whom");
+		map.put("pas", "not, n't; (footstep)");
+		map.put("pour", "for, in order to");
+		map.put("sur", "on, upon");
+		map.put("se", "oneself, himself, herself, itself, themselves");
+		map.put("son", "his, her, its; (sound; bran)");
+		map.put("plus", "more, no more");
+		map.put("pouvoir", "can, to be able to");
+		map.put("par", "by");
+		map.put("je", "I");
+		map.put("avec", "with");
+		map.put("tout", "all, very");
+		map.put("faire", "to do, make");
+		map.put("nous", "we, us");
+		map.put("mettre", "to put, place");
+		map.put("autre", "other");
+		map.put("on", "one, we");
+		map.put("mais", "but");
+		map.put("leur", "them, their, theirs");
+		map.put("comme", "like, as");
+		map.put("ou", "or");
+		map.put("si", "if, whether");
+		map.put("avant", "before");
+		map.put("y", "there");
+		map.put("dire", "to say");
+		map.put("elle", "she, her");
+		map.put("devoir", "to have to, owe; (duty)");
+		map.put("donner", "to give");
+		map.put("deux", "two");
+		map.put("même", "same, even, self");
+		map.put("prendre", "to take");
+		map.put("où", "where");
+		map.put("aussi", "too, also, as");
+		map.put("celui", "that, the one, he, him");
+		map.put("bien", "well");
+		map.put("cela", "that, it [c.l.]");
+		map.put("une fois", "time, times");
+		map.put("vous", "you [formal]");
+		map.put("encore", "again, yet");
+		map.put("vouloir", "to want");
+		map.put("nouveau", "new");
+		map.put("aller", "to go");
+		map.put("entre", "between");
+		map.put("premier", "first");
+		map.put("aucun", "none, either, neither, not any");
+		map.put("déjà", "already");
+		map.put("grand", "great, big, tall");
+		map.put("mon", "my");
+		map.put("me", "me, to me, myself ");
+		map.put("moins", "less");
+		map.put("quelque", "some");
+		map.put("lui", "him, her");
+		map.put("un temps", "time");
+		map.put("très", "very");
+		map.put("savoir", "to know [to have the knowledge]");
+		map.put("falloir", "to take, need, require");
+		map.put("voir", "to see");
+		map.put("notre", "our");
+		map.put("sans", "without");
+		map.put("dont", "whose, of which, (including)");
+		map.put("une raison", "reason");
+		map.put("un monde", "world, people");
+		map.put("non", "no, not");
+		map.put("un monsieur", "mister, sir, gentleman");
+		map.put("un an", "year");
+		map.put("un jour", "day");
+		map.put("trouver", "to find");
+		map.put("demander", "to ask for");
+		map.put("alors", "then, so");
+		map.put("après", "after");
+		map.put("venir", "to come");
+		map.put("une personne", "person, people, anybody, anyone, nobody");
+		map.put("rendre", "to render, return, yield, give up");
+		map.put("une part", "share");
+		map.put("dernier", "last");
+		map.put("lequel", "which (one), who, whom");
+		map.put("pendant", "during; (pendant)");
+		map.put("passer", "to pass");
+		map.put("peu", "little");
+		map.put("depuis", "since, for");
+		map.put("une suite", "result, follow-up, rest");
+		map.put("bon", "good");
+		map.put("comprendre", "to understand");
+		map.put("rester", "to stay");
+		map.put("un point", "point; (at all) (masculine)");
+		map.put("ainsi", "thus");
+		map.put("une heure", "hour");
 
 		return map;
 	}
