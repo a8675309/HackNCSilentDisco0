@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity {
 int correct =0;
@@ -33,6 +34,7 @@ String translation = "el/la"; //dictionary.getSpanishWord();
     Button button3;
     Button button4;
     Button button5;
+    Button button6;
     TextView textView;
     TextView score;
     TextView attempts;
@@ -59,6 +61,7 @@ String translation = "el/la"; //dictionary.getSpanishWord();
         button3 = (Button) findViewById(R.id.button3);
         button4 = (Button) findViewById(R.id.button4);
         button5 = (Button) findViewById(R. id.button5);
+        button6 = (Button) findViewById(R. id.button6);
         textView = (TextView) findViewById(R.id.textView1);
         score = (TextView) findViewById(R.id.textView2);
         attempts = (TextView) findViewById(R.id.textView3);
@@ -108,6 +111,7 @@ String translation = "el/la"; //dictionary.getSpanishWord();
             }
 
         });
+
         button5.setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -119,6 +123,16 @@ String translation = "el/la"; //dictionary.getSpanishWord();
             }
         });
 
+        button6.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                  Intent myIntent = new Intent(getBaseContext(), Main2Activity.class);
+                    startActivity(myIntent);
+
+            }
+
+        });
 
 
     }
@@ -132,6 +146,7 @@ String translation = "el/la"; //dictionary.getSpanishWord();
         textView.setText(word);
         score.setText("Score: " + correct);
         attempts.setText("Attempted: " + attempted);
+        button6.setVisibility(View.GONE);
         int randomInteger = (int)(Math.random() * 4) + 1;
         switch (randomInteger){
             case 1:
@@ -190,6 +205,9 @@ String translation = "el/la"; //dictionary.getSpanishWord();
             ++attempted;
 
             updateScreen();
+        }
+        else {
+            button6.setVisibility(View.VISIBLE);
         }
 
     }
