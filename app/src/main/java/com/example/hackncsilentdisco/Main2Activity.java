@@ -17,22 +17,18 @@ public class Main2Activity extends AppCompatActivity {
     TextView frenchAttempts;
     TextView spanishScore;
     TextView spanishAttempts;
-    int fAttempts =0;
-    double fAvgScore =0;
-    int sAttempts =0;
-    double sAvgScore =0;
-    //Scoreboard s = new Scoreboard();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-         playAgain = (Button) findViewById(R.id.playAgain);
+        playAgain = (Button) findViewById(R.id.playAgain);
         frenchAttempts = (TextView) findViewById(R.id.frenchAttempts);
         frenchScore = (TextView) findViewById(R.id.frenchScore);
         spanishAttempts = (TextView) findViewById(R.id.spanishAttempts);
         spanishScore = (TextView) findViewById(R.id.spanishScore);
 
-      String language = getIntent().getStringExtra("language");
+        String language = getIntent().getStringExtra("language");
 
         String numCorrectString = getIntent().getStringExtra("numCorrect");
         int numCorrectInt = Integer.parseInt(numCorrectString);
@@ -41,39 +37,26 @@ public class Main2Activity extends AppCompatActivity {
 
 
         if (language.equals("French")){
-            Scoreboard.fAvgScore = (double)(Scoreboard.fAttempts + numCorrectInt)/(Scoreboard.fAttempts+ numAttemptedInt);
-            Scoreboard.fAttempts+=numAttemptedInt;
-
-
+            //Scoreboard.fAvgScore = (double)(Scoreboard.fAttempts + numCorrectInt)/(Scoreboard.fAttempts+ numAttemptedInt);
+            Scoreboard.fCorrect += numCorrectInt;
+            Scoreboard.fAttempts += numAttemptedInt;
+        }else{
+            //Scoreboard.sAvgScore = (double)(Scoreboard.sAttempts + numCorrectInt)/(Scoreboard.sAttempts+ numAttemptedInt);
+            Scoreboard.sCorrect += numCorrectInt;
+            Scoreboard.sAttempts += numAttemptedInt;
         }
-        else {
-
-            Scoreboard.sAvgScore = (double)(Scoreboard.sAttempts + numCorrectInt)/(Scoreboard.sAttempts+ numAttemptedInt);
-            Scoreboard.sAttempts+=numAttemptedInt;
-
-
-        }
-
-
-
-
-
-
 
         frenchAttempts.setText("French Attempts: " + Scoreboard.fAttempts);
-        frenchScore.setText("French Average Score: " + Scoreboard.fAvgScore);
+        frenchScore.setText("French Average Score: " + Scoreboard.getFrenchAverage());
         spanishAttempts.setText("Spanish Attempts: " + Scoreboard.sAttempts);
-        spanishScore.setText("Spanish Average Score: " + Scoreboard.sAvgScore);
+        spanishScore.setText("Spanish Average Score: " + Scoreboard.getSpanishAverage());
 
         playAgain.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(getBaseContext(), Main0Activity.class);
                 startActivity(myIntent);
-
             }
-
         });
     }
 }

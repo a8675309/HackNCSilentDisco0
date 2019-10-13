@@ -2,6 +2,7 @@ package com.example.hackncsilentdisco;
 
 import android.os.Bundle;
 
+import com.example.hackncsilentdisco.ui.Scoreboard;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,15 +21,16 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.content.Intent;
 
+import com.example.hackncsilentdisco.LanguageHashMap.Language;
+
 public class MainActivity extends AppCompatActivity {
-int correct =0;
-int attempted = 0;
-boolean isSpanish= true;
-Word dictionary;
+    int correct =0;
+    int attempted = 0;
+    Language language = Language.SPANISH;
+    Word dictionary;
 
-
-String word = "the"; //dictionary.getEnglishWord();
-String translation = "el/la"; //dictionary.getSpanishWord();
+    String word;
+    String translation;
 
     Button button1;
     Button button2;
@@ -55,17 +57,9 @@ String translation = "el/la"; //dictionary.getSpanishWord();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        String language = getIntent().getStringExtra("language");
-        if (language.equals("French")){
-            isSpanish = false;
-        }
-
-        if (isSpanish== true) {
-            dictionary = new Word(LanguageHashMap.makeSpanishDictionary());
-        }
-        else {
-            dictionary = new Word(LanguageHashMap.makeFrenchDictionary());
-        }
+        String languageString = getIntent().getStringExtra("language");
+        language = Language.getLanguage(languageString);
+        dictionary = new Word(LanguageHashMap.makeDictionary(language));
 
         button1 = (Button) findViewById(R.id.button1);
         button2 = (Button) findViewById(R.id.button2);
@@ -77,59 +71,33 @@ String translation = "el/la"; //dictionary.getSpanishWord();
         score = (TextView) findViewById(R.id.textView2);
         attempts = (TextView) findViewById(R.id.textView3);
 
-        score.setText("Score: "+correct);
-        attempts.setText("Attempted: "+ attempted);
+        score.setText("Score: " + correct);
+        attempts.setText("Attempted: " + attempted);
 
         updateScreen();
 
 
-        button1.setOnClickListener(new OnClickListener() {
-
-
-            @Override
-            public void onClick(View view) {
-               clicked(button1);
-            }
-
-        });
-
-        button2.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                // Toast.makeText(MainActivity.this, "Button Clicked", Toast.LENGTH_SHORT).show();
-                clicked(button2);
-            }
-
-        });
-
-        button3.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                // Toast.makeText(MainActivity.this, "Button Clicked", Toast.LENGTH_SHORT).show();
-                clicked(button3);
-            }
-
-        });
-
-        button4.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                // Toast.makeText(MainActivity.this, "Button Clicked", Toast.LENGTH_SHORT).show();
-                clicked(button4);
-            }
-
-        });
+        button1.setOnClickListener(view -> clicked(button1));
+        button2.setOnClickListener(view -> clicked(button2));
+        button3.setOnClickListener(view -> clicked(button3));
+        button4.setOnClickListener(view -> clicked(button4));
 
         button5.setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View view) {
+                if (language == Language.FRENCH){
+                    //Scoreboard.fAvgScore = (double)(Scoreboard.fAttempts + correct)/(Scoreboard.fAttempts + attempted);
+                    Scoreboard.fCorrect += correct;
+                    Scoreboard.fAttempts += attempted;
+                }else{
+                    //Scoreboard.sAvgScore = (double)(Scoreboard.sAttempts + correct)/(Scoreboard.sAttempts + attempted);
+                    Scoreboard.fCorrect += correct;
+                    Scoreboard.sAttempts += attempted;
+                }
                 correct = 0;
                 attempted = 0;
                 updateScreen();
-                dictionary = new Word(LanguageHashMap.makeDictionary());
+                //dictionary = new Word(LanguageHashMap.makeDictionary());
 
             }
         });
@@ -138,19 +106,18 @@ String translation = "el/la"; //dictionary.getSpanishWord();
 
             @Override
             public void onClick(View view) {
+                Intent myIntent = new Intent(getBaseContext(), Main2Activity.class);
 
-                  Intent myIntent = new Intent(getBaseContext(), Main2Activity.class);
-
-                  if (isSpanish)
-                myIntent.putExtra("language", "Spanish");
-                  else
-                      myIntent.putExtra("language", "French");
+                if (language == Language.SPANISH)
+                    myIntent.putExtra("language", "Spanish");
+                else
+                    myIntent.putExtra("language", "French");
 
                 myIntent.putExtra("numCorrect", ""+correct);
                 myIntent.putExtra("numAttempted", ""+attempted);
 
 
-                    startActivity(myIntent);
+                startActivity(myIntent);
 
             }
 
@@ -159,12 +126,10 @@ String translation = "el/la"; //dictionary.getSpanishWord();
 
     }
 
-
-
     public void updateScreen() {
         dictionary.recalculate();
         word = dictionary.getEnglishWord();
-        translation = dictionary.getSpanishWord();
+        translation = dictionary.getForeignWord();
         textView.setText(word);
         score.setText("Score: " + correct);
         attempts.setText("Attempted: " + attempted);
@@ -172,65 +137,55 @@ String translation = "el/la"; //dictionary.getSpanishWord();
         int randomInteger = (int)(Math.random() * 4) + 1;
         switch (randomInteger){
             case 1:
-                button1.setText(dictionary.getSpanishWord());
+                button1.setText(dictionary.getForeignWord());
                 dictionary.recalculate();
-                button2.setText(dictionary.getSpanishWord());
+                button2.setText(dictionary.getForeignWord());
                 dictionary.recalculate();
-                button3.setText(dictionary.getSpanishWord());
+                button3.setText(dictionary.getForeignWord());
                 dictionary.recalculate();
-                button4.setText(dictionary.getSpanishWord());
+                button4.setText(dictionary.getForeignWord());
                 break;
             case 2:
-                button2.setText(dictionary.getSpanishWord());
+                button2.setText(dictionary.getForeignWord());
                 dictionary.recalculate();
-                button1.setText(dictionary.getSpanishWord());
+                button1.setText(dictionary.getForeignWord());
                 dictionary.recalculate();
-                button3.setText(dictionary.getSpanishWord());
+                button3.setText(dictionary.getForeignWord());
                 dictionary.recalculate();
-                button4.setText(dictionary.getSpanishWord());
+                button4.setText(dictionary.getForeignWord());
                 break;
             case 3:
-                button3.setText(dictionary.getSpanishWord());
+                button3.setText(dictionary.getForeignWord());
                 dictionary.recalculate();
-                button1.setText(dictionary.getSpanishWord());
+                button1.setText(dictionary.getForeignWord());
                 dictionary.recalculate();
-                button2.setText(dictionary.getSpanishWord());
+                button2.setText(dictionary.getForeignWord());
                 dictionary.recalculate();
-                button4.setText(dictionary.getSpanishWord());
+                button4.setText(dictionary.getForeignWord());
                 break;
             case 4:
-                button4.setText(dictionary.getSpanishWord());
+                button4.setText(dictionary.getForeignWord());
                 dictionary.recalculate();
-                button2.setText(dictionary.getSpanishWord());
+                button2.setText(dictionary.getForeignWord());
                 dictionary.recalculate();
-                button3.setText(dictionary.getSpanishWord());
+                button3.setText(dictionary.getForeignWord());
                 dictionary.recalculate();
-                button1.setText(dictionary.getSpanishWord());
+                button1.setText(dictionary.getForeignWord());
                 break;
 
         }
-
-
-        //use math.random to determine which button has correct answer next
-        //set other three to random incorrect translations
-        /*button1.setText();
-        button1.setText();
-        button1.setText();
-        */
    }
 
     public void clicked(Button button) {
         if (attempted<10){
-            if(button.getText().equals(translation)){
-                ++correct;
-            }
-            ++attempted;
+            if(button.getText().equals(translation))
+                correct++;
+
+            attempted++;
 
             updateScreen();
-        }
-        else {
+        }else
             button6.setVisibility(View.VISIBLE);
-        }
 
     }
 

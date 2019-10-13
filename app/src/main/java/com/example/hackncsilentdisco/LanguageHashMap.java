@@ -7,6 +7,14 @@ public class LanguageHashMap {
 	public enum Language {
 		SPANISH,
 		FRENCH;
+
+		public static Language getLanguage(String lang){
+			switch(lang){
+				case "French": return FRENCH;
+				case "Spanish": return SPANISH;
+				default: return SPANISH;
+			}
+		}
 	}
 
 	@Deprecated
