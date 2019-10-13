@@ -4,9 +4,23 @@ import java.util.HashMap;
 
 public class LanguageHashMap {
 
+	public enum Language {
+		SPANISH,
+		FRENCH;
+	}
+
 	@Deprecated
 	public static HashMap<String, String> makeDictionary() {
 		return makeSpanishDictionary();
+	}
+
+	public static HashMap<String, String> makeDictionary(Language language){
+		switch(language){
+			case SPANISH: return makeSpanishDictionary();
+			case FRENCH: return makeFrenchDictionary();
+		}
+
+		return makeSpanishDictionary(); //just in case i guess
 	}
 
 	/**
